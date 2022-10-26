@@ -26,6 +26,20 @@ const options = {
     opt.params = {...opt.params, channelId:id, order:'date'}
     return await request(opt)
   }
+  export const fetchVideoDetailsFromAPI=async(id)=>{
+    const opt={...options, url:`${BASE_URL}/videos`}
+    opt.params = {part:'snippet,statistics', id:id}
+    return await request(opt)
+  }
+  export const fetchRelatedVideosFromAPI=async(id)=>{
+    const opt = {...options,url:`${BASE_URL}/search`}
+    opt.params = {...opt.params, 
+      relatedToVideoId: id,
+      type: 'video'
+    }
+
+    return await request(opt)
+  }
   const request=async(opt)=>{
     //console.log(opt)
     const {data} = await axios.request(opt)

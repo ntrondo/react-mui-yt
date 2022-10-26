@@ -5,16 +5,19 @@ import {CheckCircle} from '@mui/icons-material'
 import { demoThumbnailUrl, demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle } from '../utils/constants'
 
 const VideoCard = ({video: {id:{videoId}, snippet}}) => {
-  const videoUrl = videoId ? `/video/${videoId}`:demoVideoUrl
+  const videoUrl = videoId ? `${process.env.REACT_APP_DOMAIN_RELATIVE_ROOT_URL}/video/${videoId}`:demoVideoUrl
   const channelUrl = snippet?.channelId ? `/channel/${snippet.channelId}`:demoChannelUrl
   
   return (
-    <Card sx={{width:{md:'320px', xs:'100%'}, boxShadow:'none', borderRadius:0}}>
+    <Card sx={{width:{xs:'100%', sm:'358px', md:'320px' }, boxShadow:'none', borderRadius:0}}>
       <Link to={videoUrl}>
       <CardMedia 
       image={snippet?.thumbnails?.high?.url}
       alt={snippet?.title}
-      sx={{width:358, height:180}}
+      sx={{
+        width:{xs: '100%', sm: '358px', md:'320px'}, 
+        height:180
+      }}
       />
       </Link>
       <CardContent sx={{backgroundColor:'#1e1e1e', height:'106px'}}>
